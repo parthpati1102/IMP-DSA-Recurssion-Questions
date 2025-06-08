@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int usingRecurssion(int index , int currSum , vector<int>& nums , int target){
+        if(index >= nums.size() && currSum == target){
+            return 1;
+        }
+
+        if(index >= nums.size() && currSum != target){
+            return 0;
+        }
+
+        int option1 = usingRecurssion(index + 1 , currSum + nums[index] , nums , target);
+
+        int option2 = usingRecurssion(index + 1 , currSum - nums[index] , nums , target);
+
+        int ans = option1 + option2;
+
+        return ans;
+    }
+
+    int findTargetSumWays(vector<int>& nums, int target) {
+         
+        int ans = usingRecurssion(0 , 0 , nums , target);
+
+        return ans;
+    }
+};
