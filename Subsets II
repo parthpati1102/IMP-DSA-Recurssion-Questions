@@ -1,0 +1,34 @@
+class Solution {
+public:
+    void usingRecurssion(int index , set<vector<int>> &st , vector<int> &vec , vector<int>& nums){
+          if(index >= nums.size()){
+             st.insert(vec);
+             return;
+          }
+          
+          vec.push_back(nums[index]);
+
+          usingRecurssion(index + 1 , st , vec , nums);
+
+          vec.pop_back();
+
+          usingRecurssion(index + 1 , st , vec , nums);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        set<vector<int>> st;
+
+        vector<int> vec;
+
+        sort(nums.begin() , nums.end());
+
+        usingRecurssion(0 , st , vec , nums);
+        
+        vector<vector<int>> ans;
+
+        for(auto s : st){
+           ans.push_back(s);
+        }
+
+        return ans;
+    }
+};
