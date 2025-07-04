@@ -1,0 +1,71 @@
+class Solution {
+public:
+  void usingRecurssion(int index , vector<int> &candidates , vector<vector<int>> &ans , vector<int> &vec , int target){
+        if(target == 0){
+            ans.push_back(vec);
+            return;
+        }
+        
+        for(int i = index ; i < candidates.size() ; i++){
+
+            if(i > index && candidates[i] == candidates[i - 1]){
+                continue;
+            }
+
+            vec.push_back(candidates[i]);
+
+            if(target - candidates[i] >= 0){
+              usingRecurssion(i + 1, candidates , ans , vec , target - candidates[i]);
+            }
+            
+            vec.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> vec;
+        
+        sort(candidates.begin() , candidates.end());
+        usingRecurssion(0 , candidates , ans , vec , target);
+
+        return ans;
+    }
+};
+
+//Map Approach
+class Solution {
+public:
+  void usingRecurssion(int index , vector<int> &candidates , vector<vector<int>> &ans , vector<int> &vec , int target){
+        if(target == 0){
+            ans.push_back(vec);
+            return;
+        }
+        
+        
+        unordered_map<int , bool> mp;
+        for(int i = index ; i < candidates.size() ; i++){
+
+            if(mp.find(candidates[i]) != mp.end()){
+                continue;
+            }
+             
+            mp[candidates[i]] = true;
+            vec.push_back(candidates[i]);
+
+            if(target - candidates[i] >= 0){
+              usingRecurssion(i + 1, candidates , ans , vec , target - candidates[i]);
+            }
+            
+            vec.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> vec;
+        
+        sort(candidates.begin() , candidates.end());
+        usingRecurssion(0 , candidates , ans , vec , target);
+
+        return ans;
+    }
+};
