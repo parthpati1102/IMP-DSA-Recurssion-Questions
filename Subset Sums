@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    void usingRecurssion(vector<int> &arr , vector<int> &ans , int index , int sum){
+        if(index >= arr.size()){
+            ans.push_back(sum);
+            return;
+        }
+        
+        usingRecurssion(arr , ans , index + 1 , sum + arr[index]);
+        
+        usingRecurssion(arr , ans , index + 1 , sum);
+    }
+    vector<int> subsetSums(vector<int>& arr) {
+        // code here
+        
+        vector<int> ans;
+        
+        int sum = 0;
+        
+        usingRecurssion(arr , ans , 0 , sum);
+        
+        return ans;
+    }
+};
